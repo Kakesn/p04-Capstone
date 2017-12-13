@@ -8,15 +8,21 @@ using namespace std;
 
 int main()
 {
+    char data[100];
     int month, day;
     char answer;
     char ans;
     person player;
+    string zodiacSgn;
+    string color;
     string zodiacSign;
     string favColor;
     string firstName, lastName;
-    ofstream people;
+    vector <string> peoples;
+    ofstream people("List.txt");
     people.open("List.txt");
+    ifstream peeps("List.txt");
+    peeps.open("List.txt");
     
     do {
     cout<< "Would you like me to guess your favorite color? (type any character to continue and N for No)"<<endl;
@@ -78,14 +84,27 @@ int main()
     zodiacSign = "CAPRICORN";
     favColor = "Brown";
     }
-    else {
-    cout <<"You have entered invalid input" <<endl;
+    else { 
+    cout<< "You have entered invalid input" << endl;
     }
-    cout << "Your zodiac sign is " <<zodiacSign<< " and your favorite color is "<<favColor<< endl;
+    
+    player.setzodiacSign(zodiacSign);
+    player.setfavColor(favColor);
+    cout << " " <<player.displayName()<< "'s zodiac sign is " <<player.displayzodiacSign()<< " and your favorite color is "<<player.displayfavColor()<< endl;
+    people << firstName << lastName << zodiacSgn << color << endl;
+    cin.ignore();
+    people.close();
     }
+    }while(answer!='n' || answer!='N');
     cout<< "Would you like to go again? Y/N" <<endl;
     cin >> ans;
     }while(ans=='y' || ans=='Y');
+    
+    ifstream peeps;
+    peeps.open("List.txt");
+    cout <<"Reading from file"<<endl;
+    peeps >> firstName >> lastName >> zodiacSgn >> color>>;
+    peeps.close();
 
 return 0;
 }
